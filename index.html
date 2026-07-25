@@ -292,6 +292,28 @@
     /* EXPORT AREA */
     .export-area{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;font-size:.78rem;font-family:monospace;color:var(--muted);white-space:pre-wrap;word-break:break-all;max-height:260px;overflow-y:auto;margin-top:12px}
 
+
+    /* ── IMAGE UPLOADER ───────────────────────────────── */
+    .img-upload-wrap{display:flex;flex-direction:column;gap:10px}
+    .img-drop-zone{
+      border:2px dashed var(--border);border-radius:var(--radius);
+      padding:22px 16px;text-align:center;cursor:pointer;
+      transition:border-color var(--trans),background var(--trans);
+      background:var(--bg3);position:relative;
+    }
+    .img-drop-zone:hover,.img-drop-zone.drag-over{border-color:var(--accent);background:rgba(124,106,247,.07)}
+    .img-drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+    .img-drop-zone .dz-icon{font-size:1.8rem;margin-bottom:6px}
+    .img-drop-zone .dz-text{font-size:.82rem;color:var(--muted)}
+    .img-drop-zone .dz-text strong{color:var(--accent)}
+    .img-preview-row{display:flex;align-items:center;gap:12px}
+    .img-preview-box{flex-shrink:0;background:var(--bg3);border:1px solid var(--border);overflow:hidden;display:grid;place-items:center;font-size:1.8rem}
+    .img-preview-box img{width:100%;height:100%;object-fit:cover}
+    .img-url-row{display:flex;gap:8px;align-items:center}
+    .img-url-row input{flex:1}
+    .img-url-row .or-badge{font-size:.72rem;color:var(--muted);white-space:nowrap;padding:0 4px}
+    .img-clear-btn{background:transparent;border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);padding:5px 10px;font-size:.75rem;flex-shrink:0;transition:all var(--trans)}
+    .img-clear-btn:hover{border-color:var(--danger);color:var(--danger)}
     /* MISC */
     footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:.78rem;color:var(--muted);margin-top:60px}
     footer a{color:var(--accent)}
@@ -1382,9 +1404,24 @@ window.openForm = function(type, id=null) {
         <div class="form-group"><label>Name *</label><input id="f-name" value="${esc(v.name||'')}" placeholder="Gawr Gura"/></div>
         <div class="form-group"><label>ID / Slug *</label><input id="f-id" value="${esc(v.id||'')}" placeholder="gawr-gura" ${isEdit?'readonly style="opacity:.6"':''}/><div class="hint">Lowercase, hyphens only. Cannot change after creation.</div></div>
       </div>
-      <div class="form-group"><label>Portrait Image URL</label>
-        <input id="f-image" value="${esc(v.image||'')}" placeholder="https://..." oninput="updateImgPreview('f-image','f-img-prev')"/>
-        <div class="img-preview"><div class="img-preview-box" id="f-img-prev">${v.image?`<img src="${esc(v.image)}" alt="">`:``}${!v.image?'🎭':''}</div><span style="font-size:.78rem;color:var(--muted)">Paste any image URL — wikia, imgur, etc.</span></div>
+      <div class="form-group"><label>Portrait Image</label>
+        <div class="img-upload-wrap">
+          <div class="img-preview-row">
+            <div class="img-preview-box" id="f-img-prev" style="width:60px;height:80px;border-radius:6px">${v.image?`<img src="${esc(v.image)}" alt="">`:'🎭'}</div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+              <div class="img-url-row">
+                <input id="f-image" value="${esc(v.image||'')} " placeholder="Paste image URL…" oninput="syncImgFromUrl('f-image','f-img-prev')"/>
+                <button type="button" class="img-clear-btn" onclick="clearImg('f-image','f-img-prev','🎭')">✕ Clear</button>
+              </div>
+              <span style="font-size:.72rem;color:var(--muted)">Or upload from your PC:</span>
+            </div>
+          </div>
+          <div class="img-drop-zone" id="vt-drop" ondragover="dzOver(event,'vt-drop')" ondragleave="dzOut('vt-drop')" ondrop="dzDrop(event,'f-image','f-img-prev','vt-drop',false)">
+            <input type="file" accept="image/*" onchange="fileToImg(this,'f-image','f-img-prev',false)"/>
+            <div class="dz-icon">🖼️</div>
+            <div class="dz-text"><strong>Click to browse</strong> or drag &amp; drop<br>PNG, JPG, WEBP, GIF · Max 2 MB</div>
+          </div>
+        </div>
       </div>
       <div class="form-row">
         <div class="form-group"><label>Agency *</label><select id="f-agency"><option value="">— Select —</option>${agOpts}</select></div>
@@ -1440,11 +1477,26 @@ window.openForm = function(type, id=null) {
         <div class="form-group"><label>Name *</label><input id="f-name" value="${esc(a.name||'')}" placeholder="Hololive Production"/></div>
         <div class="form-group"><label>ID / Slug *</label><input id="f-id" value="${esc(a.id||'')}" placeholder="hololive" ${isEdit?'readonly style="opacity:.6"':''}/><div class="hint">Lowercase, hyphens only. Used to link VTubers.</div></div>
       </div>
-      <div class="form-group"><label>Logo Image URL</label>
-        <input id="f-image" value="${esc(a.image||'')}" placeholder="https://..." oninput="updateImgPreview('f-image','f-img-prev')"/>
-        <div class="img-preview"><div class="img-preview-box" id="f-img-prev" style="border-radius:50%">${a.image?`<img src="${esc(a.image)}" alt="" style="border-radius:50%">`:a.emoji||'🏢'}</div><span style="font-size:.78rem;color:var(--muted)">Paste a square logo URL</span></div>
+      <div class="form-group"><label>Agency Logo</label>
+        <div class="img-upload-wrap">
+          <div class="img-preview-row">
+            <div class="img-preview-box" id="f-img-prev" style="width:56px;height:56px;border-radius:50%">${a.image?`<img src="${esc(a.image)}" alt="" style="border-radius:50%">`:a.emoji||'🏢'}</div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+              <div class="img-url-row">
+                <input id="f-image" value="${esc(a.image||'')} " placeholder="Paste logo URL…" oninput="syncImgFromUrl('f-image','f-img-prev')"/>
+                <button type="button" class="img-clear-btn" onclick="clearImg('f-image','f-img-prev','🏢')">✕ Clear</button>
+              </div>
+              <span style="font-size:.72rem;color:var(--muted)">Or upload from your PC (square image recommended):</span>
+            </div>
+          </div>
+          <div class="img-drop-zone" id="ag-drop" ondragover="dzOver(event,'ag-drop')" ondragleave="dzOut('ag-drop')" ondrop="dzDrop(event,'f-image','f-img-prev','ag-drop',true)">
+            <input type="file" accept="image/*" onchange="fileToImg(this,'f-image','f-img-prev',true)"/>
+            <div class="dz-icon">🏢</div>
+            <div class="dz-text"><strong>Click to browse</strong> or drag &amp; drop<br>Square PNG or SVG recommended · Max 1 MB</div>
+          </div>
+        </div>
       </div>
-      <div class="form-group"><label>Emoji (fallback if no logo)</label><input id="f-emoji" value="${esc(a.emoji||'🏢')}" placeholder="🌸" maxlength="4"/></div>`;
+      <div class="form-group"><label>Emoji (shown if no logo uploaded)</label><input id="f-emoji" value="${esc(a.emoji||'🏢')}" placeholder="🌸" maxlength="4"/></div>`;
   }
 
   if (type==='video') {
@@ -1479,11 +1531,78 @@ window.openForm = function(type, id=null) {
   overlay.classList.add('open');
 };
 
-window.updateImgPreview = function(inputId, previewId) {
+// ── Image upload helpers ─────────────────────────────────────────────────────
+const MAX_IMG_BYTES = 2 * 1024 * 1024; // 2 MB
+
+function setPreview(previewId, src, isCircle) {
+  const box = document.getElementById(previewId);
+  if (!box) return;
+  const r = isCircle ? 'border-radius:50%' : 'border-radius:6px';
+  if (src) box.innerHTML = `<img src="${src}" alt="" style="width:100%;height:100%;object-fit:cover;${r}" onerror="this.parentElement.innerHTML='❌'">`;
+  else box.innerHTML = '🎭';
+}
+
+window.syncImgFromUrl = function(inputId, previewId) {
   const url = document.getElementById(inputId).value.trim();
-  const box  = document.getElementById(previewId);
-  if (url) box.innerHTML=`<img src="${esc(url)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" onerror="this.parentElement.innerHTML='❌'">`;
-  else box.innerHTML='🎭';
+  setPreview(previewId, url || null, previewId === 'f-img-prev' && document.getElementById(previewId).style.borderRadius === '50%');
+};
+
+// Keep old name working (used in some inline handlers)
+window.updateImgPreview = window.syncImgFromUrl;
+
+window.clearImg = function(inputId, previewId, fallback) {
+  const inp = document.getElementById(inputId);
+  if (inp) inp.value = '';
+  const box = document.getElementById(previewId);
+  if (box) box.innerHTML = fallback || '🎭';
+};
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    if (file.size > MAX_IMG_BYTES) { reject(new Error('Image is larger than 2 MB. Please resize it first.')); return; }
+    const reader = new FileReader();
+    reader.onload  = e => resolve(e.target.result);
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
+}
+
+window.fileToImg = async function(input, inputId, previewId, isCircle) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  try {
+    const b64 = await fileToBase64(file);
+    const urlInput = document.getElementById(inputId);
+    if (urlInput) urlInput.value = b64;
+    setPreview(previewId, b64, isCircle);
+    toast('Image loaded ✓', 'success');
+  } catch(e) {
+    toast(e.message, 'error');
+  }
+  input.value = ''; // reset so same file can be re-selected
+};
+
+window.dzOver = function(e, zoneId) {
+  e.preventDefault();
+  document.getElementById(zoneId)?.classList.add('drag-over');
+};
+window.dzOut = function(zoneId) {
+  document.getElementById(zoneId)?.classList.remove('drag-over');
+};
+window.dzDrop = async function(e, inputId, previewId, zoneId, isCircle) {
+  e.preventDefault();
+  dzOut(zoneId);
+  const file = e.dataTransfer?.files?.[0];
+  if (!file || !file.type.startsWith('image/')) { toast('Please drop an image file', 'error'); return; }
+  try {
+    const b64 = await fileToBase64(file);
+    const urlInput = document.getElementById(inputId);
+    if (urlInput) urlInput.value = b64;
+    setPreview(previewId, b64, isCircle);
+    toast('Image loaded ✓', 'success');
+  } catch(e) {
+    toast(e.message, 'error');
+  }
 };
 
 window.closeForm = ()=>document.getElementById('form-overlay').classList.remove('open');
