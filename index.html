@@ -314,6 +314,31 @@
     .img-url-row .or-badge{font-size:.72rem;color:var(--muted);white-space:nowrap;padding:0 4px}
     .img-clear-btn{background:transparent;border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);padding:5px 10px;font-size:.75rem;flex-shrink:0;transition:all var(--trans)}
     .img-clear-btn:hover{border-color:var(--danger);color:var(--danger)}
+
+    /* ── ADMIN DRAG-REORDER ───────────────────────────── */
+    .drag-handle{cursor:grab;color:var(--muted);padding:0 6px;font-size:1rem;user-select:none;flex-shrink:0}
+    .drag-handle:active{cursor:grabbing}
+    tr.dragging{opacity:.4}
+    tr.drag-over-top td{box-shadow:0 -2px 0 var(--accent) inset}
+    tr.drag-over-bot td{box-shadow:0 2px 0 var(--accent)}
+    .reorder-hint{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:5px;margin-left:auto}
+
+    /* ── IMAGE CROP MODAL ────────────────────────────── */
+    #crop-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:600;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:16px}
+    #crop-overlay.open{display:flex}
+    #crop-header{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:700px}
+    #crop-header h3{font-family:var(--font-disp);font-weight:700;color:#fff}
+    #crop-canvas-wrap{position:relative;background:#111;border-radius:var(--radius);overflow:hidden;max-width:700px;width:100%;cursor:crosshair;touch-action:none}
+    #crop-canvas{display:block;max-width:100%;user-select:none}
+    #crop-selection{position:absolute;border:2px solid var(--accent2);box-shadow:0 0 0 9999px rgba(0,0,0,.55);pointer-events:none}
+    #crop-controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:700px;width:100%}
+    .crop-btn{padding:9px 20px;border-radius:var(--radius-sm);font-size:.88rem;font-weight:600;cursor:pointer;border:none}
+    .crop-btn.primary{background:var(--accent);color:#fff}
+    .crop-btn.secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+    .crop-ratio-btns{display:flex;gap:6px}
+    .crop-ratio-btn{padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all var(--trans)}
+    .crop-ratio-btn.active{border-color:var(--accent2);color:var(--accent2);background:rgba(91,228,200,.1)}
+    #crop-hint{font-size:.75rem;color:var(--muted)}
     /* MISC */
     footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:.78rem;color:var(--muted);margin-top:60px}
     footer a{color:var(--accent)}
@@ -362,7 +387,7 @@
       <div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="search-input" id="vtuber-search" placeholder="Search by name…" oninput="renderVtubers()"/></div>
       <div class="select-wrap"><select id="vtuber-status" onchange="renderVtubers()"><option value="">All Status</option><option value="active">Active</option><option value="retired">Retired</option></select></div>
       <div class="select-wrap"><select id="vtuber-agency" onchange="renderVtubers()"><option value="">All Agencies</option></select></div>
-      <div class="select-wrap"><select id="vtuber-sort" onchange="renderVtubers()"><option value="name">Name A→Z</option><option value="subs-desc">Subscribers ↓</option><option value="subs-asc">Subscribers ↑</option><option value="debut-desc">Debut (Newest)</option><option value="debut-asc">Debut (Oldest)</option></select></div>
+      <div class="select-wrap"><select id="vtuber-sort" onchange="renderVtubers()"><option value="custom">Custom Order</option><option value="name">Name A→Z</option><option value="subs-desc">Subscribers ↓</option><option value="subs-asc">Subscribers ↑</option><option value="debut-desc">Debut (Newest)</option><option value="debut-asc">Debut (Oldest)</option></select></div>
     </div>
     <div class="vtuber-grid" id="vtuber-grid"></div>
   </div>
@@ -489,9 +514,10 @@
         <div class="admin-toolbar">
           <button class="btn-primary btn-sm" onclick="openForm('vtuber')">+ Add VTuber</button>
           <div class="search-wrap" style="flex:1;max-width:300px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="position:absolute;left:10px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="search-input" style="padding-left:30px;font-size:.82rem" placeholder="Filter…" oninput="renderAdminVtubers(this.value)"/></div>
+          <span class="reorder-hint">⠿ Drag rows to reorder</span>
         </div>
         <div class="admin-table-wrap"><table class="admin-table" id="admin-vtuber-table">
-          <thead><tr><th>Image</th><th>Name</th><th>Agency</th><th>Status</th><th>Subscribers</th><th>Debut</th><th>Actions</th></tr></thead>
+          <thead><tr><th style="width:28px"></th><th>Image</th><th>Name</th><th>Agency</th><th>Status</th><th>Subscribers</th><th>Actions</th></tr></thead>
           <tbody id="admin-vtuber-tbody"></tbody>
         </table></div>
       </div>
@@ -595,6 +621,30 @@
       <div id="modal-img-col" class="modal-img-col"></div>
       <div class="modal-body" id="modal-body-col"></div>
     </div>
+  </div>
+</div>
+
+<!-- ── IMAGE CROP MODAL ── -->
+<div id="crop-overlay">
+  <div id="crop-header">
+    <h3>✂️ Crop Image</h3>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="crop-ratio-btns">
+        <button class="crop-ratio-btn active" onclick="setCropRatio(3,4,this)">3:4</button>
+        <button class="crop-ratio-btn" onclick="setCropRatio(1,1,this)">1:1</button>
+        <button class="crop-ratio-btn" onclick="setCropRatio(16,9,this)">16:9</button>
+        <button class="crop-ratio-btn" onclick="setCropRatio(0,0,this)">Free</button>
+      </div>
+    </div>
+  </div>
+  <div id="crop-canvas-wrap">
+    <canvas id="crop-canvas"></canvas>
+    <div id="crop-selection"></div>
+  </div>
+  <div id="crop-hint">Drag to select crop area • Drag corners to resize</div>
+  <div id="crop-controls">
+    <button class="crop-btn secondary" onclick="closeCrop()">Cancel</button>
+    <button class="crop-btn primary" onclick="applyCrop()">✓ Apply Crop</button>
   </div>
 </div>
 
@@ -775,20 +825,16 @@ function startTotpTimer() {
 }
 function stopTotpTimer() { cancelAnimationFrame(_totpAnimFrame); }
 
-// ── Auto-lock on page leave ──────────────────────────────────────
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden' && isAuthed()) {
+// ── Auto-lock — ONLY on tab close / page unload, NOT on tab switch ─────────
+// We use 'pagehide' with persisted=false to catch genuine closes/refreshes.
+// visibilitychange is intentionally NOT used — switching tabs should stay logged in.
+window.addEventListener('pagehide', (e) => {
+  // e.persisted = true means page went into bfcache (tab switch/back nav) — keep session
+  // e.persisted = false means genuine close/refresh — lock
+  if (!e.persisted && isAuthed()) {
     setAuthed(false);
-    const dot = document.getElementById('admin-dot');
-    if (dot) dot.style.display = 'none';
-    // If they come back on the admin page, show lock
-    setTimeout(() => {
-      if (currentPage === 'admin') showAdminOrLock();
-    }, 100);
   }
 });
-// Also lock if user navigates away (tab close / refresh)
-window.addEventListener('pagehide', () => { if (isAuthed()) setAuthed(false); });
 
 // ═══════════════════════════════════════════════════════════════════
 //  UTILITIES
@@ -899,7 +945,8 @@ window.renderVtubers = function() {
     v.name.toLowerCase().includes(q) &&
     (st ? v.status===st : true) &&
     (ag ? v.agency===ag : true)
-  ).sort((a,b)=>{
+  );
+  if (sort !== 'custom') list = list.sort((a,b)=>{
     if (sort==='name')       return a.name.localeCompare(b.name);
     if (sort==='subs-desc')  return Number(b.subscribers)-Number(a.subscribers);
     if (sort==='subs-asc')   return Number(a.subscribers)-Number(b.subscribers);
@@ -1324,20 +1371,66 @@ window.importData = function() {
 // ═══════════════════════════════════════════════════════════════════
 window.renderAdminVtubers = function(filter='') {
   const list = DB.vtubers.filter(v=>!filter||v.name.toLowerCase().includes(filter.toLowerCase()));
-  document.getElementById('admin-vtuber-tbody').innerHTML = list.map(v=>`
-    <tr>
+  const tbody = document.getElementById('admin-vtuber-tbody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted)">No VTubers yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(v=>`
+    <tr draggable="true" data-id="${esc(v.id)}">
+      <td><span class="drag-handle" title="Drag to reorder">⠿</span></td>
       <td>${v.image?`<img class="thumb" src="${esc(v.image)}" alt="" onerror="this.style.display='none'">`:''}<span class="${v.image?'':'no-img'}">🎭</span></td>
       <td>${esc(v.name)}</td>
       <td>${esc(getAgencyName(v.agency))}</td>
       <td><span class="status-pill ${v.status}">${v.status}</span></td>
       <td>${fmtSubs(v.subscribers)}</td>
-      <td>${v.debut||'—'}</td>
       <td><div class="actions">
         <button class="btn-secondary btn-sm" onclick="openForm('vtuber','${esc(v.id)}')">Edit</button>
         <button class="btn-danger btn-sm" onclick="deleteItem('vtuber','${esc(v.id)}')">Delete</button>
       </div></td>
-    </tr>`).join('') || '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted)">No VTubers yet.</td></tr>';
+    </tr>`).join('');
+  initDragReorder(tbody);
 };
+
+// ── Drag-and-drop row reordering ─────────────────────────────────
+function initDragReorder(tbody) {
+  let dragSrc = null;
+  tbody.querySelectorAll('tr[draggable]').forEach(row => {
+    row.addEventListener('dragstart', e => {
+      dragSrc = row;
+      row.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    row.addEventListener('dragend', () => {
+      dragSrc = null;
+      tbody.querySelectorAll('tr').forEach(r => r.classList.remove('dragging','drag-over-top','drag-over-bot'));
+    });
+    row.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (!dragSrc || dragSrc === row) return;
+      tbody.querySelectorAll('tr').forEach(r => r.classList.remove('drag-over-top','drag-over-bot'));
+      const mid = row.getBoundingClientRect().top + row.getBoundingClientRect().height / 2;
+      row.classList.add(e.clientY < mid ? 'drag-over-top' : 'drag-over-bot');
+    });
+    row.addEventListener('drop', e => {
+      e.preventDefault();
+      if (!dragSrc || dragSrc === row) return;
+      const before = e.clientY < row.getBoundingClientRect().top + row.getBoundingClientRect().height / 2;
+      const srcId  = dragSrc.dataset.id;
+      const tgtId  = row.dataset.id;
+      const srcIdx = DB.vtubers.findIndex(v => v.id === srcId);
+      if (srcIdx === -1) return;
+      const [moved] = DB.vtubers.splice(srcIdx, 1);
+      const newTgt  = DB.vtubers.findIndex(v => v.id === tgtId);
+      DB.vtubers.splice(before ? newTgt : newTgt + 1, 0, moved);
+      saveData();
+      renderAdminVtubers();
+      renderVtubers();
+      toast('Order saved ✓', 'success');
+    });
+  });
+}
+
 
 window.renderAdminAgencies = function() {
   document.getElementById('admin-agency-tbody').innerHTML = DB.agencies.map(a=>{ const mc=DB.vtubers.filter(v=>v.agency===a.id).length; const ts=DB.vtubers.filter(v=>v.agency===a.id).reduce((s,v)=>s+Number(v.subscribers||0),0); return `
@@ -1411,7 +1504,8 @@ window.openForm = function(type, id=null) {
             <div style="flex:1;display:flex;flex-direction:column;gap:6px">
               <div class="img-url-row">
                 <input id="f-image" value="${esc(v.image||'')} " placeholder="Paste image URL…" oninput="syncImgFromUrl('f-image','f-img-prev')"/>
-                <button type="button" class="img-clear-btn" onclick="clearImg('f-image','f-img-prev','🎭')">✕ Clear</button>
+                <button type="button" class="img-clear-btn" onclick="openCrop('f-image','f-img-prev',3/4)" title="Crop image" style="border-color:var(--accent2);color:var(--accent2)">✂️</button>
+                <button type="button" class="img-clear-btn" onclick="clearImg('f-image','f-img-prev','🎭')">✕</button>
               </div>
               <span style="font-size:.72rem;color:var(--muted)">Or upload from your PC:</span>
             </div>
@@ -1484,7 +1578,8 @@ window.openForm = function(type, id=null) {
             <div style="flex:1;display:flex;flex-direction:column;gap:6px">
               <div class="img-url-row">
                 <input id="f-image" value="${esc(a.image||'')} " placeholder="Paste logo URL…" oninput="syncImgFromUrl('f-image','f-img-prev')"/>
-                <button type="button" class="img-clear-btn" onclick="clearImg('f-image','f-img-prev','🏢')">✕ Clear</button>
+                <button type="button" class="img-clear-btn" onclick="openCrop('f-image','f-img-prev',1)" title="Crop image" style="border-color:var(--accent2);color:var(--accent2)">✂️</button>
+                <button type="button" class="img-clear-btn" onclick="clearImg('f-image','f-img-prev','🏢')">✕</button>
               </div>
               <span style="font-size:.72rem;color:var(--muted)">Or upload from your PC (square image recommended):</span>
             </div>
@@ -1713,6 +1808,211 @@ function openConfirm(title, msg, cb) {
   document.getElementById('confirm-ok-btn').onclick=()=>{ closeConfirm(); cb&&cb(); };
 }
 window.closeConfirm=()=>document.getElementById('confirm-overlay').classList.remove('open');
+
+
+// ═══════════════════════════════════════════════════════════════════
+//  IMAGE CROP TOOL
+// ═══════════════════════════════════════════════════════════════════
+let _cropState = {
+  srcImg: null, canvas: null, ctx: null,
+  imgX:0, imgY:0, imgW:0, imgH:0, scale:1,
+  sel: {x:0,y:0,w:0,h:0},
+  drag: null,  // {type:'create'|'move'|'nw'|'ne'|'sw'|'se', startX, startY, origSel}
+  ratio: 3/4,
+  targetInputId: null, targetPreviewId: null,
+};
+const HANDLE_R = 7;
+
+window.openCrop = function(inputId, previewId, ratio) {
+  const inp = document.getElementById(inputId);
+  const src = inp ? inp.value.trim() : '';
+  if (!src) { toast('No image to crop — upload or paste a URL first', 'error'); return; }
+
+  _cropState.targetInputId  = inputId;
+  _cropState.targetPreviewId = previewId;
+  _cropState.ratio = ratio || 0;
+
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    _cropState.srcImg = img;
+    document.getElementById('crop-overlay').classList.add('open');
+    requestAnimationFrame(setupCropCanvas);
+  };
+  img.onerror = () => toast('Could not load image for cropping', 'error');
+  img.src = src;
+};
+
+function setupCropCanvas() {
+  const wrap   = document.getElementById('crop-canvas-wrap');
+  const canvas = document.getElementById('crop-canvas');
+  const ctx    = canvas.getContext('2d');
+  const img    = _cropState.srcImg;
+
+  // Fit image into wrap
+  const maxW = wrap.clientWidth  || 700;
+  const maxH = Math.min(window.innerHeight * 0.55, 520);
+  const scale = Math.min(maxW / img.naturalWidth, maxH / img.naturalHeight, 1);
+
+  const dw = Math.round(img.naturalWidth  * scale);
+  const dh = Math.round(img.naturalHeight * scale);
+
+  canvas.width  = dw;
+  canvas.height = dh;
+
+  _cropState.canvas = canvas;
+  _cropState.ctx    = ctx;
+  _cropState.scale  = scale;
+  _cropState.imgX = 0; _cropState.imgY = 0;
+  _cropState.imgW = dw; _cropState.imgH = dh;
+
+  // Default selection: centred, respecting ratio
+  const r = _cropState.ratio;
+  let sw, sh;
+  if (r) {
+    sw = Math.round(Math.min(dw, dh * r));
+    sh = Math.round(sw / r);
+    if (sh > dh) { sh = dh; sw = Math.round(sh * r); }
+  } else { sw = Math.round(dw * 0.8); sh = Math.round(dh * 0.8); }
+  _cropState.sel = { x: Math.round((dw-sw)/2), y: Math.round((dh-sh)/2), w:sw, h:sh };
+
+  drawCrop();
+  attachCropEvents(canvas);
+}
+
+function drawCrop() {
+  const {canvas,ctx,srcImg,imgW,imgH,sel} = _cropState;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(srcImg,0,0,imgW,imgH);
+
+  // Update overlay div (CSS overlay approach for crisp selection)
+  const selDiv = document.getElementById('crop-selection');
+  selDiv.style.left   = sel.x+'px';
+  selDiv.style.top    = sel.y+'px';
+  selDiv.style.width  = sel.w+'px';
+  selDiv.style.height = sel.h+'px';
+}
+
+function clampSel(s, iw, ih) {
+  s.x = Math.max(0, Math.min(s.x, iw - s.w));
+  s.y = Math.max(0, Math.min(s.y, ih - s.h));
+  s.w = Math.max(20, Math.min(s.w, iw - s.x));
+  s.h = Math.max(20, Math.min(s.h, ih - s.y));
+}
+
+function getHandle(mx,my) {
+  const {sel} = _cropState;
+  const pts = {
+    nw:{x:sel.x,      y:sel.y},
+    ne:{x:sel.x+sel.w,y:sel.y},
+    sw:{x:sel.x,      y:sel.y+sel.h},
+    se:{x:sel.x+sel.w,y:sel.y+sel.h},
+  };
+  for (const [k,p] of Object.entries(pts))
+    if (Math.abs(mx-p.x)<=HANDLE_R+4 && Math.abs(my-p.y)<=HANDLE_R+4) return k;
+  if (mx>sel.x && mx<sel.x+sel.w && my>sel.y && my<sel.y+sel.h) return 'move';
+  return 'create';
+}
+
+function evXY(e, canvas) {
+  const r = canvas.getBoundingClientRect();
+  const touch = e.touches?.[0] || e;
+  return { x: touch.clientX - r.left, y: touch.clientY - r.top };
+}
+
+function attachCropEvents(canvas) {
+  // Remove old listeners by cloning
+  const fresh = canvas.cloneNode(false);
+  canvas.parentNode.replaceChild(fresh, canvas);
+  _cropState.canvas = fresh;
+  fresh.getContext('2d').drawImage(_cropState.srcImg, 0,0, _cropState.imgW, _cropState.imgH);
+
+  function onDown(e) {
+    e.preventDefault();
+    const {x,y} = evXY(e, fresh);
+    const type = getHandle(x,y);
+    _cropState.drag = { type, startX:x, startY:y, origSel:{..._cropState.sel} };
+  }
+  function onMove(e) {
+    e.preventDefault();
+    if (!_cropState.drag) return;
+    const {x,y} = evXY(e, fresh);
+    const {drag, ratio, imgW, imgH} = _cropState;
+    const dx = x - drag.startX, dy = y - drag.startY;
+    let s = {...drag.origSel};
+
+    if (drag.type === 'create') {
+      s.x = Math.min(drag.startX,x); s.y = Math.min(drag.startY,y);
+      s.w = Math.abs(dx); s.h = Math.abs(dy);
+      if (ratio) s.h = s.w / ratio;
+    } else if (drag.type === 'move') {
+      s.x += dx; s.y += dy;
+    } else {
+      if (drag.type==='nw'||drag.type==='sw') { s.x+=dx; s.w-=dx; }
+      if (drag.type==='ne'||drag.type==='se') { s.w+=dx; }
+      if (drag.type==='nw'||drag.type==='ne') { s.y+=dy; s.h-=dy; }
+      if (drag.type==='sw'||drag.type==='se') { s.h+=dy; }
+      if (ratio) {
+        if (drag.type==='se'||drag.type==='ne') s.h = s.w/ratio;
+        else s.w = s.h*ratio;
+      }
+    }
+    clampSel(s, imgW, imgH);
+    _cropState.sel = s;
+    drawCrop();
+  }
+  function onUp(e) { _cropState.drag = null; }
+
+  fresh.addEventListener('mousedown',  onDown);
+  fresh.addEventListener('mousemove',  onMove);
+  fresh.addEventListener('mouseup',    onUp);
+  fresh.addEventListener('touchstart', onDown, {passive:false});
+  fresh.addEventListener('touchmove',  onMove, {passive:false});
+  fresh.addEventListener('touchend',   onUp);
+  drawCrop();
+}
+
+window.setCropRatio = function(w, h, btn) {
+  document.querySelectorAll('.crop-ratio-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  _cropState.ratio = (w&&h) ? w/h : 0;
+  // Refit selection
+  if (_cropState.srcImg) setupCropCanvas();
+};
+
+window.applyCrop = function() {
+  const {srcImg, sel, scale} = _cropState;
+  if (!srcImg || sel.w < 4 || sel.h < 4) { toast('Select an area first','error'); return; }
+
+  const out = document.createElement('canvas');
+  // Map canvas pixel coords back to natural image coords
+  const nx = Math.round(sel.x / scale);
+  const ny = Math.round(sel.y / scale);
+  const nw = Math.round(sel.w / scale);
+  const nh = Math.round(sel.h / scale);
+
+  out.width  = nw;
+  out.height = nh;
+  out.getContext('2d').drawImage(srcImg, nx,ny,nw,nh, 0,0,nw,nh);
+
+  const b64 = out.toDataURL('image/png');
+  const inp = document.getElementById(_cropState.targetInputId);
+  if (inp) inp.value = b64;
+
+  const isCircle = _cropState.targetPreviewId === 'f-img-prev' &&
+    document.getElementById(_cropState.targetPreviewId)?.style.borderRadius === '50%';
+  setPreview(_cropState.targetPreviewId, b64, isCircle);
+
+  closeCrop();
+  toast('Crop applied ✓', 'success');
+};
+
+window.closeCrop = function() {
+  document.getElementById('crop-overlay').classList.remove('open');
+  _cropState.srcImg = null;
+  _cropState.drag   = null;
+  document.getElementById('crop-selection').style.cssText='';
+};
 
 // ═══════════════════════════════════════════════════════════════════
 //  INIT
