@@ -1,5 +1,5 @@
 /*
-  DeshVTuber Hub — main.js
+  Indian VTuber Index — main.js
   ------------------------
   Table of contents:
     1. NAVIGATION
