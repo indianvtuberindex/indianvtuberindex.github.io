@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>देश VTuber Hub — India's VTuber Index</title>
+  <meta name="description" content="Discover Indian VTubers, agencies and events. Browse talent profiles, search by language, generation or agency, and explore the Indian VTuber scene." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Swiper (bundled locally, see assets/css/swiper-bundle.min.css) -->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Favicon (decorative inline glyph, replace with assets/img/favicon.svg if desired) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23A855F7'/%3E%3Cstop offset='1' stop-color='%2338BDF8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%230A0714'/%3E%3Ccircle cx='50' cy='42' r='20' fill='url(%23g)'/%3E%3Cpath d='M20 90 Q50 60 80 90' stroke='url(%23g)' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!--==================== SKIP LINK ====================-->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!--==================== HEADER ====================-->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner container">
+
+      <a href="#top" class="brand" aria-label="देश VTuber Hub — home">
+        <span class="brand-mark" aria-hidden="true">दे</span>
+        <span class="brand-text">
+          <span class="brand-name">Desh<em>VTuber</em></span>
+          <span class="brand-tagline">India's VTuber Index</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#top" class="nav-link is-active" data-nav>Home</a></li>
+          <li><a href="#talents" class="nav-link" data-nav>Talents</a></li>
+          <li><a href="#agencies" class="nav-link" data-nav>Agencies</a></li>
+          <li><a href="#events" class="nav-link" data-nav>Events</a></li>
+          <li><a href="#about" class="nav-link" data-nav>About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="navSearchToggle" aria-label="Open search" aria-expanded="false" aria-controls="navSearchBar">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+        </button>
+        <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Slide-down quick search attached to nav -->
+      <div class="nav-search-bar" id="navSearchBar" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+        <input type="search" id="navSearchInput" placeholder="Search talents, agencies, generation, tags…" aria-label="Search talents" />
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="top"></div>
+
+    <!--==================== HERO ====================-->
+    <section class="hero" aria-labelledby="heroHeading">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-blob hero-blob--violet"></div>
+        <div class="hero-blob hero-blob--blue"></div>
+        <div class="hero-grid"></div>
+        <span class="hero-particle p1"></span>
+        <span class="hero-particle p2"></span>
+        <span class="hero-particle p3"></span>
+        <span class="hero-particle p4"></span>
+        <span class="hero-particle p5"></span>
+      </div>
+
+      <div class="container hero-inner">
+        <p class="hero-eyebrow reveal">🇮🇳 Bharat's VTuber Scene, All in One Place</p>
+        <h1 id="heroHeading" class="hero-heading reveal">
+          Discover the faces<br />
+          behind <span class="text-gradient">India's avatars.</span>
+        </h1>
+        <p class="hero-subtitle reveal">
+          An independent, fan-run index of Indian VTubers, agencies and indies —
+          browse profiles, filter by language or generation, and find your next oshi.
+        </p>
+
+        <form class="hero-search reveal" id="heroSearchForm" role="search">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+          <input type="search" id="heroSearchInput" placeholder="Try “Hindi”, “Gen 2”, “VSinger”, an agency…" aria-label="Search talents" />
+          <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </form>
+
+        <div class="hero-ctas reveal">
+          <a href="#talents" class="btn btn-primary">Browse Talents</a>
+          <a href="#agencies" class="btn btn-ghost">Explore Agencies</a>
+        </div>
+
+        <dl class="hero-stats reveal" id="heroStats">
+          <!-- Values are manually editable in assets/js/main.js → SITE_STATS -->
+          <div class="stat-item">
+            <dt>Talents</dt>
+            <dd data-count-to="0" data-suffix="+">0</dd>
+          </div>
+          <div class="stat-item">
+            <dt>Agencies</dt>
+            <dd data-count-to="0" data-suffix="">0</dd>
+          </div>
+          <div class="stat-item">
+            <dt>Active Projects</dt>
+            <dd data-count-to="0" data-suffix="+">0</dd>
+          </div>
+          <div class="stat-item">
+            <dt>Community Members</dt>
+            <dd data-count-to="0" data-suffix="K+">0</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!--==================== FEATURED TALENTS ====================-->
+    <section class="featured" aria-labelledby="featuredHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">Editor's Picks</p>
+          <h2 id="featuredHeading" class="section-heading">Featured this week</h2>
+          <p class="section-desc">A rotating shortlist, hand-picked instead of algorithm-ranked.</p>
+        </div>
+      </div>
+
+      <div class="featured-swiper-wrap reveal">
+        <div class="swiper featured-swiper" id="featuredSwiper">
+          <div class="swiper-wrapper" id="featuredSwiperWrapper">
+            <!-- Slides injected by main.js from FEATURED_IDS -->
+          </div>
+          <div class="swiper-button-prev" aria-label="Previous featured talent"></div>
+          <div class="swiper-button-next" aria-label="Next featured talent"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!--==================== FILTER BAR ====================-->
+    <section class="directory" id="talents" aria-labelledby="directoryHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">The Index</p>
+          <h2 id="directoryHeading" class="section-heading">All talents</h2>
+          <p class="section-desc">Filter, search and sort the full roster of profiled Indian VTubers.</p>
+        </div>
+
+        <div class="filter-bar reveal" id="filterBar">
+          <div class="filter-search">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+            <input type="search" id="directorySearchInput" placeholder="Search by name, agency, tag…" aria-label="Search talents" />
+          </div>
+
+          <div class="filter-groups" id="filterGroups">
+            <!-- Filter chip groups injected by main.js: Agency, Language, Generation, Gender, Platform, Content Type -->
+          </div>
+
+          <div class="filter-sort">
+            <label for="sortSelect">Sort</label>
+            <select id="sortSelect">
+              <option value="alphabetical">Alphabetical (A–Z)</option>
+              <option value="newest">Newest debut first</option>
+              <option value="oldest">Oldest debut first</option>
+            </select>
+          </div>
+
+          <button class="chip chip-clear" id="clearFiltersBtn" type="button">Clear filters</button>
+        </div>
+
+        <p class="results-meta" id="resultsMeta" role="status" aria-live="polite"></p>
+
+        <div class="talent-grid" id="talentGrid">
+          <!-- Talent cards injected by main.js from TALENTS -->
+        </div>
+
+        <p class="empty-state" id="emptyState" hidden>
+          No talents match those filters yet — try clearing a few and searching again.
+        </p>
+      </div>
+    </section>
+
+    <!--==================== AGENCIES ====================-->
+    <section class="agencies" id="agencies" aria-labelledby="agenciesHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">Talent Agencies</p>
+          <h2 id="agenciesHeading" class="section-heading">Houses &amp; indie collectives</h2>
+          <p class="section-desc">From multi-talent agencies to solo indie creators building their own labels.</p>
+        </div>
+
+        <div class="agency-grid" id="agencyGrid">
+          <!-- Agency cards injected by main.js from AGENCIES -->
+        </div>
+      </div>
+    </section>
+
+    <!--==================== EVENTS ====================-->
+    <section class="events" id="events" aria-labelledby="eventsHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">On the Calendar</p>
+          <h2 id="eventsHeading" class="section-heading">Events</h2>
+          <p class="section-desc">Streams, collabs and community meetups — updated by hand, so always accurate.</p>
+        </div>
+
+        <div class="events-tabs reveal" role="tablist" aria-label="Event timing">
+          <button class="events-tab is-active" id="tabUpcoming" role="tab" aria-selected="true" aria-controls="upcomingEvents">Upcoming</button>
+          <button class="events-tab" id="tabPast" role="tab" aria-selected="false" aria-controls="pastEvents">Past</button>
+        </div>
+
+        <div class="event-grid" id="upcomingEvents" role="tabpanel" aria-labelledby="tabUpcoming">
+          <!-- Injected by main.js from EVENTS (upcoming) -->
+        </div>
+        <div class="event-grid" id="pastEvents" role="tabpanel" aria-labelledby="tabPast" hidden>
+          <!-- Injected by main.js from EVENTS (past) -->
+        </div>
+      </div>
+    </section>
+
+    <!--==================== ABOUT ====================-->
+    <section class="about" id="about" aria-labelledby="aboutHeading">
+      <div class="container about-inner">
+        <div class="about-copy reveal">
+          <p class="section-eyebrow">About the Index</p>
+          <h2 id="aboutHeading" class="section-heading">A fan-made map of a fast-growing scene</h2>
+          <p>
+            DeshVTuber Hub is an independent, static directory built to help viewers find Indian
+            VTubers across languages, platforms and agencies. Every profile is curated by hand —
+            no scrapers, no auto-generated bios, no ranking algorithm deciding who gets seen.
+          </p>
+          <p>
+            Are you a VTuber or agency and want to be listed or corrected? Reach out through the
+            links in the footer below.
+          </p>
+          <div class="about-badges">
+            <span class="mini-badge">Independently run</span>
+            <span class="mini-badge">Manually curated</span>
+            <span class="mini-badge">100% static site</span>
+          </div>
+        </div>
+        <div class="about-visual reveal" aria-hidden="true">
+          <div class="orbit-ring ring-1"></div>
+          <div class="orbit-ring ring-2"></div>
+          <div class="orbit-core">हिं / EN</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--==================== FOOTER ====================-->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <span class="brand-mark" aria-hidden="true">दे</span>
+          <span class="brand-text">
+            <span class="brand-name">Desh<em>VTuber</em></span>
+          </span>
+        </a>
+        <p>A fan-run, static index of India's VTuber scene. Not affiliated with any listed talent or agency.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href="#talents">Talents</a></li>
+          <li><a href="#agencies">Agencies</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Community</h3>
+        <ul class="footer-social">
+          <li><a href="#" aria-label="Discord">Discord</a></li>
+          <li><a href="#" aria-label="X / Twitter">X (Twitter)</a></li>
+          <li><a href="#" aria-label="YouTube">YouTube</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact &amp; credits</h3>
+        <ul>
+          <li><a href="mailto:hello@deshvtuber.example">hello@deshvtuber.example</a></li>
+          <li>Built with HTML, CSS &amp; vanilla JS</li>
+          <li>Carousel by Swiper.js</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <p>© <span id="footerYear"></span> DeshVTuber Hub. Fan project — all names &amp; art belong to their creators.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </button>
+
+  <!--==================== TALENT PROFILE MODAL ====================-->
+  <div class="modal-overlay" id="talentModalOverlay" hidden>
+    <div class="modal talent-modal" id="talentModal" role="dialog" aria-modal="true" aria-labelledby="modalTalentName">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close profile">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.7l-1.41-1.42L9.17 12 2.89 5.71 4.3 4.29l6.29 6.3 6.3-6.3z"/></svg>
+      </button>
+      <div class="modal-content" id="modalContent">
+        <!-- Fully populated by main.js openTalentModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Local, no-build JS -->
+  <script src="assets/js/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
