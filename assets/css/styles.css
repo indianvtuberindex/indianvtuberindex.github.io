@@ -411,6 +411,14 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow-panel);
   color: var(--text-muted);
 }
+/* The rule above sets display:flex unconditionally, which was silently
+   overriding the [hidden] attribute (equal CSS specificity, but author
+   stylesheets always beat the browser's built-in [hidden]{display:none}
+   rule) — that's why the bar was showing permanently instead of only
+   popping out when the search icon is clicked. This puts it back on top. */
+.nav-search-bar[hidden] {
+  display: none;
+}
 .nav-search-bar input {
   flex: 1;
   background: transparent;
@@ -582,6 +590,16 @@ img { max-width: 100%; display: block; }
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
 }
 .featured-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-panel), var(--glow-violet); }
+/* Real photo, when a talent object has an `image` path — painted below the
+   dark fade (::after) so the name/description stay readable either way. */
+.featured-card .featured-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
 .featured-card::before {
   content: "";
   position: absolute;
@@ -801,7 +819,20 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   margin-bottom: 14px;
 }
+/* Real photo, when a talent object has an `image` path — sits above the
+   gradient + initials fallback below it, so a missing/broken file just
+   reveals the placeholder instead of showing a broken-image icon. */
+.talent-portrait .portrait-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
 .talent-portrait .portrait-glyph {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-display);
   font-size: 2.6rem;
   font-weight: 700;
@@ -811,11 +842,13 @@ img { max-width: 100%; display: block; }
 .talent-portrait .portrait-rings {
   position: absolute;
   inset: 0;
+  z-index: 0;
   background-image: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35), transparent 45%);
 }
 
 .tier-ribbon {
   position: absolute;
+  z-index: 3;
   top: 10px;
   left: -6px;
   padding: 4px 12px 4px 16px;
@@ -831,6 +864,7 @@ img { max-width: 100%; display: block; }
 
 .platform-row {
   position: absolute;
+  z-index: 3;
   top: 10px;
   right: 10px;
   display: flex;
@@ -894,11 +928,23 @@ img { max-width: 100%; display: block; }
 }
 
 .agency-card {
+  position: relative;
   border-radius: var(--radius-lg);
   padding: 26px;
+  overflow: hidden;
   transition: transform 0.3s var(--ease-out), border-color 0.3s;
 }
 .agency-card:hover { transform: translateY(-4px); border-color: var(--border-glass-strong); }
+
+/* Real banner file, when an agency object has a `banner` path — full-bleed
+   strip across the top of the card, above everything else. */
+.agency-banner-photo {
+  display: block;
+  width: calc(100% + 52px);
+  height: 140px;
+  object-fit: cover;
+  margin: -26px -26px 20px;
+}
 
 .agency-head {
   display: flex;
@@ -907,6 +953,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 16px;
 }
 .agency-logo {
+  position: relative;
   width: 58px;
   height: 58px;
   border-radius: var(--radius-sm);
@@ -917,6 +964,17 @@ img { max-width: 100%; display: block; }
   font-size: 1.2rem;
   color: #fff;
   flex-shrink: 0;
+  overflow: hidden;
+}
+/* Real logo/photo file, when an agency object has an `image` path — covers
+   the gradient + initials fallback that sits underneath it. */
+.agency-logo .logo-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 .agency-title h3 { margin-bottom: 2px; font-size: 1.15rem; }
 .agency-title span {
@@ -971,6 +1029,7 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
 }
 .agency-talent-chip .mini-glyph {
+  position: relative;
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -980,6 +1039,17 @@ img { max-width: 100%; display: block; }
   font-size: 0.68rem;
   font-weight: 700;
   color: #fff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Real avatar file, when a talent object has an `image` path. */
+.mini-glyph .mini-glyph-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 /*==================== EVENTS ====================*/
@@ -1018,6 +1088,15 @@ img { max-width: 100%; display: block; }
   padding: 20px;
   position: relative;
   overflow: hidden;
+}
+/* Real banner image, when an event object has an `image` path — full-width
+   strip above the rest of the card content. */
+.event-banner-photo {
+  display: block;
+  width: calc(100% + 40px);
+  height: 140px;
+  object-fit: cover;
+  margin: -20px -20px 16px;
 }
 .event-date-badge {
   display: inline-flex;
@@ -1202,24 +1281,47 @@ img { max-width: 100%; display: block; }
 .modal-banner {
   height: 170px;
   position: relative;
+  /* No overflow:hidden here — the portrait avatar below intentionally
+     hangs past the bottom of this banner into the modal body, and
+     clipping this box would cut that overlap off. The banner-photo
+     image already fits exactly via inset:0, so nothing here needs
+     clipping; the outer .talent-modal already rounds the whole card. */
+}
+/* Real banner file, when a talent object has a `banner` path. */
+.modal-banner .banner-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .modal-portrait {
-  width: 108px;
-  height: 108px;
+  width: 132px;
+  height: 132px;
   border-radius: var(--radius-md);
   border: 4px solid var(--bg-panel);
   display: grid;
   place-items: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   color: #fff;
   position: absolute;
   left: 28px;
-  bottom: -40px;
+  bottom: -50px;
+  overflow: hidden;
+}
+/* Real portrait file, when a talent object has an `image` path. */
+.modal-portrait .portrait-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
-.modal-body { padding: 56px 28px 32px; }
+.modal-body { padding: 68px 28px 32px; }
 .modal-body-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
 .modal-body-head h2 { margin-bottom: 4px; }
 .modal-body-head .modal-agency { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-blue-soft); }
