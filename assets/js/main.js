@@ -158,7 +158,7 @@
     {
       id: "szivana",
       name: "Szivana Nabila",
-      image: "assets/img/iruma.png",
+      // image: "assets/img/missing.png",
       // banner: "assets/img/talents/szivana-banner.jpg",   ← add a separate, wide banner image here (reusing the portrait photo above causes a bad crop clash — see chat)
       fanName: "Gotimals",
       oshiMark: "✦",
