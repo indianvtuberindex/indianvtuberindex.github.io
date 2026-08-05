@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indian VTuber Index — Discover India's VTubers</title>
+  <meta name="description" content="Discover Indian VTubers, agencies and events. Browse talent profiles, search by language, generation or agency, and explore the Indian VTuber scene." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Swiper (bundled locally, see assets/css/swiper-bundle.min.css) -->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Favicon (site emblem, cropped from assets/img/logo-full.png) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png" />
+  <link rel="icon" type="image/png" sizes="256x256" href="assets/img/favicon-256.png" />
+</head>
+<body>
+
+  <!--==================== SKIP LINK ====================-->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!--==================== HEADER ====================-->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner container">
+
+      <a href="#top" class="brand" aria-label="Indian VTuber Index — home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/img/logo-emblem.png" alt="" class="brand-mark-img" />
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">Indian <em>VTuber</em> Index</span>
+          <span class="brand-tagline">Talent &amp; Agency Directory</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#top" class="nav-link is-active" data-nav>Home</a></li>
+          <li><a href="#talents" class="nav-link" data-nav>Talents</a></li>
+          <li><a href="#agencies" class="nav-link" data-nav>Agencies</a></li>
+          <li><a href="#events" class="nav-link" data-nav>Events</a></li>
+          <li><a href="#about" class="nav-link" data-nav>About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="navSearchToggle" aria-label="Open search" aria-expanded="false" aria-controls="navSearchBar">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+        </button>
+        <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Slide-down quick search attached to nav -->
+      <div class="nav-search-bar" id="navSearchBar" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+        <input type="search" id="navSearchInput" placeholder="Search talents, agencies, generation, tags…" aria-label="Search talents" />
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="top"></div>
+
+    <!--==================== HERO ====================-->
+    <section class="hero" aria-labelledby="heroHeading">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-blob hero-blob--violet"></div>
+        <div class="hero-blob hero-blob--blue"></div>
+        <div class="hero-grid"></div>
+        <span class="hero-particle p1"></span>
+        <span class="hero-particle p2"></span>
+        <span class="hero-particle p3"></span>
+        <span class="hero-particle p4"></span>
+        <span class="hero-particle p5"></span>
+      </div>
+
+      <div class="container hero-inner">
+        <p class="hero-eyebrow reveal"> Indian VTuber Scene, All in One Place</p>
+        <h1 id="heroHeading" class="hero-heading reveal">
+          Discover a variety of <br />
+          new <span class="text-gradient">Indian VTubers.</span>
+        </h1>
+        <p class="hero-subtitle reveal">
+          An independent, fanrun index of Indian VTubers, agencies and indies.
+          Browse profiles, filter by language or generation, and find your next oshi.
+        </p>
+
+        <form class="hero-search reveal" id="heroSearchForm" role="search">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+          <input type="search" id="heroSearchInput" placeholder="Try “Hindi”, “Gen 2”, “VSinger”, an agency…" aria-label="Search talents" />
+          <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </form>
+
+        <div class="hero-ctas reveal">
+          <a href="#talents" class="btn btn-primary">Browse Talents</a>
+          <a href="#agencies" class="btn btn-ghost">Explore Agencies</a>
+        </div>
+
+        <dl class="hero-stats reveal" id="heroStats">
+          <!-- Values are manually editable in assets/js/main.js → SITE_STATS -->
+          <div class="stat-item">
+            <dt>Talents</dt>
+            <dd data-count-to="0" data-suffix="+">0</dd>
+          </div>
+          <div class="stat-item">
+            <dt>Agencies</dt>
+            <dd data-count-to="0" data-suffix="">0</dd>
+          </div>
+          <div class="stat-item">
+            <dt>Active Projects</dt>
+            <dd data-count-to="0" data-suffix="+">0</dd>
+          </div>
+          <div class="stat-item">
+            <dt>Community Members</dt>
+            <dd data-count-to="0" data-suffix="K+">0</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!--==================== FEATURED TALENTS ====================-->
+    <section class="featured" aria-labelledby="featuredHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">Editor's Picks</p>
+          <h2 id="featuredHeading" class="section-heading">Featured this week</h2>
+          <p class="section-desc">A rotating shortlist, hand-picked instead of algorithm-ranked.</p>
+        </div>
+      </div>
+
+      <div class="featured-swiper-wrap reveal">
+        <div class="swiper featured-swiper" id="featuredSwiper">
+          <div class="swiper-wrapper" id="featuredSwiperWrapper">
+            <!-- Slides injected by main.js from FEATURED_IDS -->
+          </div>
+          <div class="swiper-button-prev" aria-label="Previous featured talent"></div>
+          <div class="swiper-button-next" aria-label="Next featured talent"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!--==================== FILTER BAR ====================-->
+    <section class="directory" id="talents" aria-labelledby="directoryHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">The Index</p>
+          <h2 id="directoryHeading" class="section-heading">All talents</h2>
+          <p class="section-desc">Filter, search and sort the full roster of profiled Indian VTubers.</p>
+        </div>
+
+        <div class="filter-bar reveal" id="filterBar">
+          <div class="filter-search">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+            <input type="search" id="directorySearchInput" placeholder="Search by name, agency, tag…" aria-label="Search talents" />
+          </div>
+
+          <div class="filter-groups" id="filterGroups">
+            <!-- Filter chip groups injected by main.js: Agency, Language, Generation, Gender, Platform, Content Type -->
+          </div>
+
+          <div class="filter-sort">
+            <label for="sortSelect">Sort</label>
+            <select id="sortSelect">
+              <option value="alphabetical">Alphabetical (A–Z)</option>
+              <option value="newest">Newest debut first</option>
+              <option value="oldest">Oldest debut first</option>
+            </select>
+          </div>
+
+          <button class="chip chip-clear" id="clearFiltersBtn" type="button">Clear filters</button>
+        </div>
+
+        <p class="results-meta" id="resultsMeta" role="status" aria-live="polite"></p>
+
+        <div class="talent-grid" id="talentGrid">
+          <!-- Talent cards injected by main.js from TALENTS -->
+        </div>
+
+        <p class="empty-state" id="emptyState" hidden>
+          No talents match those filters yet — try clearing a few and searching again.
+        </p>
+      </div>
+    </section>
+
+    <!--==================== AGENCIES ====================-->
+    <section class="agencies" id="agencies" aria-labelledby="agenciesHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">Talent Agencies</p>
+          <h2 id="agenciesHeading" class="section-heading">Houses &amp; indie collectives</h2>
+          <p class="section-desc">From multi-talent agencies to solo indie creators building their own labels.</p>
+        </div>
+
+        <div class="agency-grid" id="agencyGrid">
+          <!-- Agency cards injected by main.js from AGENCIES -->
+        </div>
+      </div>
+    </section>
+
+    <!--==================== EVENTS ====================-->
+    <section class="events" id="events" aria-labelledby="eventsHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">On the Calendar</p>
+          <h2 id="eventsHeading" class="section-heading">Events</h2>
+          <p class="section-desc">Streams, collabs and community meetups — updated by hand, so always accurate.</p>
+        </div>
+
+        <div class="events-tabs reveal" role="tablist" aria-label="Event timing">
+          <button class="events-tab is-active" id="tabUpcoming" role="tab" aria-selected="true" aria-controls="upcomingEvents">Upcoming</button>
+          <button class="events-tab" id="tabPast" role="tab" aria-selected="false" aria-controls="pastEvents">Past</button>
+        </div>
+
+        <div class="event-grid" id="upcomingEvents" role="tabpanel" aria-labelledby="tabUpcoming">
+          <!-- Injected by main.js from EVENTS (upcoming) -->
+        </div>
+        <div class="event-grid" id="pastEvents" role="tabpanel" aria-labelledby="tabPast" hidden>
+          <!-- Injected by main.js from EVENTS (past) -->
+        </div>
+      </div>
+    </section>
+
+    <!--==================== ABOUT ====================-->
+    <section class="about" id="about" aria-labelledby="aboutHeading">
+      <div class="container about-inner">
+        <div class="about-copy reveal">
+          <p class="section-eyebrow">About the Index</p>
+          <h2 id="aboutHeading" class="section-heading">A fan made map of a fast growing scene</h2>
+          <p>
+            Indian VTuber Index is an independent, project built to help viewers find Indian
+            VTubers across platforms and agencies. Every profile is curated by hand 
+            no scrapers, no ranking algorithm deciding who gets seen.
+          </p>
+          <p>
+            Are you a VTuber or agency and want to be listed or corrected? Reach out through the
+            links in the footer below.
+          </p>
+          <div class="about-badges">
+            <span class="mini-badge">Independently run</span>
+            <span class="mini-badge">Manually curated</span>
+            <span class="mini-badge">Authentic Vibe</span>
+          </div>
+        </div>
+        <div class="about-visual reveal" aria-hidden="true">
+          <div class="orbit-ring ring-1"></div>
+          <div class="orbit-ring ring-2"></div>
+          <div class="orbit-core">INVTINDEX</div>
+        </div>
+      </div>
+    </section>
+
+    <!--==================== DISCORD EMBED BUILDER ====================-->
+    <section class="embed-builder" id="embedBuilder" aria-labelledby="embedBuilderHeading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-eyebrow">Discord</p>
+          <h2 id="embedBuilderHeading" class="section-heading">Embed Builder</h2>
+          <p class="section-desc">
+            Build a complete Discord embed with title, description, author, image, fields, footer and live JSON output.
+            Preview every detail before copying the payload for webhooks or bots.
+          </p>
+        </div>
+
+        <div class="embed-builder-grid reveal">
+          <form class="embed-form glass-panel" id="embedForm" autocomplete="off">
+            <div class="embed-form-row">
+              <label for="embedTitleInput">Embed title</label>
+              <input id="embedTitleInput" class="embed-input" type="text" placeholder="Embed title" />
+            </div>
+
+            <div class="embed-form-row">
+              <label for="embedDescriptionInput">Description</label>
+              <textarea id="embedDescriptionInput" class="embed-textarea" placeholder="TEST 1."></textarea>
+            </div>
+
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedUrlInput">Title URL</label>
+                <input id="embedUrlInput" class="embed-input" type="url" placeholder="https://example.com" />
+              </div>
+              <div>
+                <label for="embedColorInput">Accent color</label>
+                <input id="embedColorInput" class="embed-input embed-input--color" type="color" value="#5865f2" aria-label="Discord embed color" />
+              </div>
+            </div>
+
+            <div class="embed-form-row">
+              <h3 class="embed-form-heading">Author</h3>
+            </div>
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedAuthorNameInput">Author name</label>
+                <input id="embedAuthorNameInput" class="embed-input" type="text" placeholder="Author name" />
+              </div>
+              <div>
+                <label for="embedAuthorIconInput">Author icon URL</label>
+                <input id="embedAuthorIconInput" class="embed-input" type="url" placeholder="https://..." />
+              </div>
+            </div>
+
+            <div class="embed-form-row">
+              <h3 class="embed-form-heading">Media</h3>
+            </div>
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedThumbnailInput">Thumbnail URL</label>
+                <input id="embedThumbnailInput" class="embed-input" type="url" placeholder="https://i.imgur.com/STlSIKt.jpeg" />
+              </div>
+              <div>
+                <label for="embedImageInput">Main image URL</label>
+                <input id="embedImageInput" class="embed-input" type="url" placeholder="https://i.imgur.com/yG0aE8q.jpeg" />
+              </div>
+            </div>
+
+            <div class="embed-form-row">
+              <h3 class="embed-form-heading">Fields</h3>
+            </div>
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedFieldName1">Field 1 name</label>
+                <input id="embedFieldName1" class="embed-input" type="text" placeholder="Field name" />
+              </div>
+              <div>
+                <label for="embedFieldValue1">Field 1 value</label>
+                <input id="embedFieldValue1" class="embed-input" type="text" placeholder="Field value" />
+              </div>
+            </div>
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedFieldName2">Field 2 name</label>
+                <input id="embedFieldName2" class="embed-input" type="text" placeholder="Field name" />
+              </div>
+              <div>
+                <label for="embedFieldValue2">Field 2 value</label>
+                <input id="embedFieldValue2" class="embed-input" type="text" placeholder="Field value" />
+              </div>
+            </div>
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedFieldName3">Field 3 name</label>
+                <input id="embedFieldName3" class="embed-input" type="text" placeholder="Field name" />
+              </div>
+              <div>
+                <label for="embedFieldValue3">Field 3 value</label>
+                <input id="embedFieldValue3" class="embed-input" type="text" placeholder="Field value" />
+              </div>
+            </div>
+
+            <div class="embed-form-row embed-form-row--grid">
+              <label class="embed-checkbox" for="embedFieldInline1">
+                <input id="embedFieldInline1" type="checkbox" /> Show field 1 inline
+              </label>
+              <label class="embed-checkbox" for="embedFieldInline2">
+                <input id="embedFieldInline2" type="checkbox" /> Show field 2 inline
+              </label>
+              <label class="embed-checkbox" for="embedFieldInline3">
+                <input id="embedFieldInline3" type="checkbox" /> Show field 3 inline
+              </label>
+            </div>
+
+            <div class="embed-form-row">
+              <h3 class="embed-form-heading">Footer</h3>
+            </div>
+            <div class="embed-form-row embed-form-row--split">
+              <div>
+                <label for="embedFooterTextInput">Footer text</label>
+                <input id="embedFooterTextInput" class="embed-input" type="text" placeholder="Footer text" />
+              </div>
+              <div>
+                <label for="embedFooterIconInput">Footer icon URL</label>
+                <input id="embedFooterIconInput" class="embed-input" type="url" placeholder="https://..." />
+              </div>
+            </div>
+
+            <div class="embed-form-row">
+              <label for="embedTimestampInput">Timestamp</label>
+              <input id="embedTimestampInput" class="embed-input" type="datetime-local" />
+            </div>
+          </form>
+
+          <div class="embed-preview" aria-label="Discord embed preview">
+            <div class="embed-preview-card glass-panel" id="discordEmbedPreview">
+              <div class="discord-embed-bar" id="embedPreviewBar"></div>
+              <div class="discord-embed-body">
+                <div class="discord-embed-author" id="embedPreviewAuthor">
+                  <img class="discord-embed-author-icon" id="embedPreviewAuthorIcon" alt="Author icon" />
+                  <span class="discord-embed-author-name" id="embedPreviewAuthorName">Author name</span>
+                </div>
+                <h3 class="discord-embed-title"><a href="#" id="embedPreviewTitleLink" target="_blank" rel="noopener noreferrer"><span id="embedPreviewTitle">Embed title</span></a></h3>
+                <p class="discord-embed-description" id="embedPreviewDescription">A preview of your description will appear here as you type it.</p>
+                <div class="discord-embed-fields" id="embedPreviewFields"></div>
+                <div class="discord-embed-media">
+                  <img class="discord-embed-image" id="embedPreviewImage" alt="Embed main image" />
+                  <img class="discord-embed-thumbnail" id="embedPreviewThumbnail" alt="Thumbnail" />
+                </div>
+                <div class="discord-embed-footer" id="embedPreviewFooter">
+                  <img class="discord-embed-footer-icon" id="embedPreviewFooterIcon" alt="Footer icon" />
+                  <span class="discord-embed-footer-text" id="embedPreviewFooterText">Footer text</span>
+                  <span class="discord-embed-timestamp" id="embedPreviewTimestamp"></span>
+                </div>
+              </div>
+            </div>
+            <div class="embed-json-panel glass-panel">
+              <div class="embed-json-controls">
+                <h4>Embed JSON</h4>
+                <button class="btn btn-sm btn-primary" type="button" id="copyEmbedJsonBtn">Copy JSON</button>
+              </div>
+              <pre class="embed-json-output" id="embedJsonOutput"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--==================== FOOTER ====================-->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="assets/img/logo-emblem.png" alt="" class="brand-mark-img" />
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">Indian <em>VTuber</em> Index</span>
+          </span>
+        </a>
+        <p>A fan run, index of India's VTuber scene. Not affiliated with any listed talent or agency.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href="#talents">Talents</a></li>
+          <li><a href="#agencies">Agencies</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#embedBuilder">Embed Builder</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Community</h3>
+        <ul class="footer-social">
+          <li><a href="https://discord.gg/7wb4pD5Xw9" aria-label="Discord">Discord</a></li>
+          <li><a href="https://x.com/iruma_vt" aria-label="X / Twitter">X (Twitter)</a></li>
+          <li><a href="https://www.youtube.com/@irumaVT" aria-label="YouTube">YouTube</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact &amp; credits</h3>
+        <ul>
+          <li><a href="mailto:admin.invtindex@gmail.com">admin.invtindex@gmail.com</a></li>
+          <li>Built with HTML, CSS &amp; vanilla JS</li>
+          <li>Carousel by Swiper.js</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <p>© <span id="footerYear"></span> Indian VTuber Index. Fan project — all names &amp; art belong to their creators.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </button>
+
+  <!--==================== TALENT PROFILE MODAL ====================-->
+  <div class="modal-overlay" id="talentModalOverlay" hidden>
+    <div class="modal talent-modal" id="talentModal" role="dialog" aria-modal="true" aria-labelledby="modalTalentName">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close profile">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.7l-1.41-1.42L9.17 12 2.89 5.71 4.3 4.29l6.29 6.3 6.3-6.3z"/></svg>
+      </button>
+      <div class="modal-content" id="modalContent">
+        <!-- Fully populated by main.js openTalentModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Local, no-build JS -->
+  <script src="assets/js/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
