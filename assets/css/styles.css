@@ -1150,180 +1150,6 @@ img { max-width: 100%; display: block; }
 .event-card.is-past { opacity: 0.65; }
 .event-card.is-past .event-date-badge { background: var(--bg-panel-2); }
 
-/*==================== DISCORD EMBED BUILDER ====================*/
-.embed-builder { padding: 40px 0 120px; }
-.embed-builder-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 32px;
-  align-items: start;
-}
-.embed-form {
-  display: grid;
-  gap: 18px;
-  padding: 28px;
-}
-.embed-form-row {
-  display: grid;
-  gap: 10px;
-}
-.embed-form-row--split {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.embed-form-row--grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.embed-form-heading {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--text-primary);
-}
-.embed-input,
-.embed-textarea {
-  width: 100%;
-  border-radius: 14px;
-  border: 1px solid var(--border-glass);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-primary);
-  padding: 14px 16px;
-  resize: vertical;
-}
-.embed-input--color {
-  padding: 6px;
-  height: 44px;
-}
-.embed-checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  color: var(--text-primary);
-  cursor: pointer;
-}
-.embed-checkbox input {
-  margin: 0;
-}
-.embed-preview {
-  display: grid;
-  gap: 20px;
-}
-.embed-preview-card,
-.embed-json-panel {
-  border-radius: var(--radius-md);
-  padding: 20px;
-}
-.discord-embed-bar {
-  width: 4px;
-  border-radius: 999px;
-  margin-right: 16px;
-  background: var(--accent-violet);
-}
-.discord-embed-body {
-  display: grid;
-  gap: 16px;
-}
-.discord-embed-author {
-  display: none;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-.discord-embed-author-icon,
-.discord-embed-footer-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.discord-embed-title {
-  margin: 0;
-  font-size: 1rem;
-}
-.discord-embed-title a {
-  color: var(--text-primary);
-  text-decoration: none;
-}
-.discord-embed-description {
-  margin: 0;
-  color: var(--text-secondary);
-}
-.discord-embed-fields {
-  display: grid;
-  gap: 12px;
-}
-.discord-embed-field {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-.discord-embed-field--inline {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-.discord-embed-field-name {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent-blue-soft);
-  margin-bottom: 6px;
-}
-.discord-embed-field-value {
-  color: var(--text-secondary);
-  white-space: pre-wrap;
-}
-.discord-embed-media {
-  position: relative;
-}
-.discord-embed-image,
-.discord-embed-thumbnail {
-  width: 100%;
-  border-radius: 16px;
-  display: block;
-}
-.discord-embed-thumbnail {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.discord-embed-footer {
-  display: none;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-secondary);
-  font-size: 0.84rem;
-}
-.embed-json-panel {
-  display: grid;
-  gap: 16px;
-  min-height: 360px;
-}
-.embed-json-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.embed-json-output {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glass);
-  border-radius: 14px;
-  padding: 18px;
-  color: var(--text-secondary);
-  overflow-x: auto;
-  font-family: var(--font-mono);
-  font-size: 0.84rem;
-  white-space: pre;
-}
-
 /*==================== ABOUT ====================*/
 .about { padding: 40px 0 120px; }
 .about-inner {
@@ -1595,17 +1421,12 @@ img { max-width: 100%; display: block; }
 @media (max-width: 1080px) {
   .talent-grid { grid-template-columns: repeat(3, 1fr); }
   .event-grid { grid-template-columns: repeat(2, 1fr); }
-  .embed-builder-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 900px) {
   .about-inner { grid-template-columns: 1fr; gap: 40px; }
   .about-visual { order: -1; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
-  .embed-form-row--split,
-  .embed-form-row--grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 820px) {

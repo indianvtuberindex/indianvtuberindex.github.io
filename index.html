@@ -122,7 +122,7 @@
             <dd data-count-to="0" data-suffix="+">0</dd>
           </div>
           <div class="stat-item">
-            <dt>Community Members</dt>
+            <dt>residents</dt>
             <dd data-count-to="0" data-suffix="K+">0</dd>
           </div>
         </dl>
@@ -260,169 +260,6 @@
         </div>
       </div>
     </section>
-
-    <!--==================== DISCORD EMBED BUILDER ====================-->
-    <section class="embed-builder" id="embedBuilder" aria-labelledby="embedBuilderHeading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-eyebrow">Discord</p>
-          <h2 id="embedBuilderHeading" class="section-heading">Embed Builder</h2>
-          <p class="section-desc">
-            Build a complete Discord embed with title, description, author, image, fields, footer and live JSON output.
-            Preview every detail before copying the payload for webhooks or bots.
-          </p>
-        </div>
-
-        <div class="embed-builder-grid reveal">
-          <form class="embed-form glass-panel" id="embedForm" autocomplete="off">
-            <div class="embed-form-row">
-              <label for="embedTitleInput">Embed title</label>
-              <input id="embedTitleInput" class="embed-input" type="text" placeholder="Embed title" />
-            </div>
-
-            <div class="embed-form-row">
-              <label for="embedDescriptionInput">Description</label>
-              <textarea id="embedDescriptionInput" class="embed-textarea" placeholder="TEST 1."></textarea>
-            </div>
-
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedUrlInput">Title URL</label>
-                <input id="embedUrlInput" class="embed-input" type="url" placeholder="https://example.com" />
-              </div>
-              <div>
-                <label for="embedColorInput">Accent color</label>
-                <input id="embedColorInput" class="embed-input embed-input--color" type="color" value="#5865f2" aria-label="Discord embed color" />
-              </div>
-            </div>
-
-            <div class="embed-form-row">
-              <h3 class="embed-form-heading">Author</h3>
-            </div>
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedAuthorNameInput">Author name</label>
-                <input id="embedAuthorNameInput" class="embed-input" type="text" placeholder="Author name" />
-              </div>
-              <div>
-                <label for="embedAuthorIconInput">Author icon URL</label>
-                <input id="embedAuthorIconInput" class="embed-input" type="url" placeholder="https://..." />
-              </div>
-            </div>
-
-            <div class="embed-form-row">
-              <h3 class="embed-form-heading">Media</h3>
-            </div>
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedThumbnailInput">Thumbnail URL</label>
-                <input id="embedThumbnailInput" class="embed-input" type="url" placeholder="https://i.imgur.com/STlSIKt.jpeg" />
-              </div>
-              <div>
-                <label for="embedImageInput">Main image URL</label>
-                <input id="embedImageInput" class="embed-input" type="url" placeholder="https://i.imgur.com/yG0aE8q.jpeg" />
-              </div>
-            </div>
-
-            <div class="embed-form-row">
-              <h3 class="embed-form-heading">Fields</h3>
-            </div>
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedFieldName1">Field 1 name</label>
-                <input id="embedFieldName1" class="embed-input" type="text" placeholder="Field name" />
-              </div>
-              <div>
-                <label for="embedFieldValue1">Field 1 value</label>
-                <input id="embedFieldValue1" class="embed-input" type="text" placeholder="Field value" />
-              </div>
-            </div>
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedFieldName2">Field 2 name</label>
-                <input id="embedFieldName2" class="embed-input" type="text" placeholder="Field name" />
-              </div>
-              <div>
-                <label for="embedFieldValue2">Field 2 value</label>
-                <input id="embedFieldValue2" class="embed-input" type="text" placeholder="Field value" />
-              </div>
-            </div>
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedFieldName3">Field 3 name</label>
-                <input id="embedFieldName3" class="embed-input" type="text" placeholder="Field name" />
-              </div>
-              <div>
-                <label for="embedFieldValue3">Field 3 value</label>
-                <input id="embedFieldValue3" class="embed-input" type="text" placeholder="Field value" />
-              </div>
-            </div>
-
-            <div class="embed-form-row embed-form-row--grid">
-              <label class="embed-checkbox" for="embedFieldInline1">
-                <input id="embedFieldInline1" type="checkbox" /> Show field 1 inline
-              </label>
-              <label class="embed-checkbox" for="embedFieldInline2">
-                <input id="embedFieldInline2" type="checkbox" /> Show field 2 inline
-              </label>
-              <label class="embed-checkbox" for="embedFieldInline3">
-                <input id="embedFieldInline3" type="checkbox" /> Show field 3 inline
-              </label>
-            </div>
-
-            <div class="embed-form-row">
-              <h3 class="embed-form-heading">Footer</h3>
-            </div>
-            <div class="embed-form-row embed-form-row--split">
-              <div>
-                <label for="embedFooterTextInput">Footer text</label>
-                <input id="embedFooterTextInput" class="embed-input" type="text" placeholder="Footer text" />
-              </div>
-              <div>
-                <label for="embedFooterIconInput">Footer icon URL</label>
-                <input id="embedFooterIconInput" class="embed-input" type="url" placeholder="https://..." />
-              </div>
-            </div>
-
-            <div class="embed-form-row">
-              <label for="embedTimestampInput">Timestamp</label>
-              <input id="embedTimestampInput" class="embed-input" type="datetime-local" />
-            </div>
-          </form>
-
-          <div class="embed-preview" aria-label="Discord embed preview">
-            <div class="embed-preview-card glass-panel" id="discordEmbedPreview">
-              <div class="discord-embed-bar" id="embedPreviewBar"></div>
-              <div class="discord-embed-body">
-                <div class="discord-embed-author" id="embedPreviewAuthor">
-                  <img class="discord-embed-author-icon" id="embedPreviewAuthorIcon" alt="Author icon" />
-                  <span class="discord-embed-author-name" id="embedPreviewAuthorName">Author name</span>
-                </div>
-                <h3 class="discord-embed-title"><a href="#" id="embedPreviewTitleLink" target="_blank" rel="noopener noreferrer"><span id="embedPreviewTitle">Embed title</span></a></h3>
-                <p class="discord-embed-description" id="embedPreviewDescription">A preview of your description will appear here as you type it.</p>
-                <div class="discord-embed-fields" id="embedPreviewFields"></div>
-                <div class="discord-embed-media">
-                  <img class="discord-embed-image" id="embedPreviewImage" alt="Embed main image" />
-                  <img class="discord-embed-thumbnail" id="embedPreviewThumbnail" alt="Thumbnail" />
-                </div>
-                <div class="discord-embed-footer" id="embedPreviewFooter">
-                  <img class="discord-embed-footer-icon" id="embedPreviewFooterIcon" alt="Footer icon" />
-                  <span class="discord-embed-footer-text" id="embedPreviewFooterText">Footer text</span>
-                  <span class="discord-embed-timestamp" id="embedPreviewTimestamp"></span>
-                </div>
-              </div>
-            </div>
-            <div class="embed-json-panel glass-panel">
-              <div class="embed-json-controls">
-                <h4>Embed JSON</h4>
-                <button class="btn btn-sm btn-primary" type="button" id="copyEmbedJsonBtn">Copy JSON</button>
-              </div>
-              <pre class="embed-json-output" id="embedJsonOutput"></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!--==================== FOOTER ====================-->
@@ -447,7 +284,6 @@
           <li><a href="#agencies">Agencies</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#embedBuilder">Embed Builder</a></li>
         </ul>
       </div>
 
