@@ -1221,9 +1221,9 @@
       socials: { youtube: "#", instagram: "#", x: "#", twitch: "#" },
     },
     {
-      id: "meowcatmax",
-      name: "MeowCatMax",
-      // image: "assets/img/meowcatmax.png",
+      id: "Sakurasamaeyeopen",
+      name: "Sakura Sama",
+      image: "assets/img/Sakurasamaeyeopen.png",
       fanName: "N/A",
       oshiMark: "N/A",
       agencyId: "indie",
