@@ -780,7 +780,7 @@
     {
       id: "whimsymage",
       name: "WhimsyMage",
-      // image: "assets/img/whimsymage.png",
+      image: "assets/img/whimsymage.png",
       fanName: "N/A",
       oshiMark: "N/A",
       agencyId: "indie",
