@@ -146,8 +146,8 @@
       color2: "#ff0000",
       website: "#",
       description:
-        "a massive virtual YouTuber (VTuber) agency owned by ANYCOLOR Inc., featuring live-streaming Virtual Livers using Live2D models.",
-      socials: { x: "https://x.com/NIJISANJI_World", youtube: "https://www.youtube.com/@nijisanji_en",},
+        "a massive virtual YouTuber (VTuber) agency owned by Siddhart Pandit., featuring live-streaming Virtual Livers using Live2D models.",
+      socials: { x: "#", youtube: "#",},
     },
   ];
 
