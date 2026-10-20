@@ -1244,7 +1244,7 @@
       shortDesc: "N/A.",
       bio: "N/A",
       lore: "N/A",
-      socials: { youtube: "#", instagram: "#", x: "#", twitch: "#" },
+      socials: { youtube: "https://www.youtube.com/@VirtualSakura", instagram: "https://www.instagram.com/virtual_sakura/", x: "https://x.com/SakuraVirtual" },
     },
     {
       id: "mirai-moonlight",
