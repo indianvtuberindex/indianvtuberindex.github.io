@@ -3849,7 +3849,7 @@
     {
       id: "mommy-kawa",
       name: "Mommy Kawa",
-      // image: "assets/img/mommy-kawa.png",
+      image: "assets/img/mommy-kawa.png",
       fanName: "N/A",
       oshiMark: "N/A",
       agencyId: "indie",
@@ -3858,7 +3858,7 @@
       debut: "2020-09-23",
       birthday: "08-11",
       height: "N/A",
-      languages: ["English", "Hindi"],
+      languages: ["English"],
       platforms: ["YouTube"],
       contentType: ["Talk", "Gaming"],
       tags: ["Talk", "Indie"],
