@@ -109,6 +109,7 @@
       id: "nijisanji-india",
       name: "Nijisanji India",
       shortName: "Nijisanji",
+      image: "assets/img/nijisanji.png",
       color1: "#ff8400",
       color2: "#ff0000",
       website: "#",
