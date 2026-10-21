@@ -142,6 +142,7 @@
       id: "virtualismin",
       name: "virtualism IN",
       shortName: "Virtualism",
+      image: "assets/img/virtualismin.png",
       color1: "#fffdfb",
       color2: "#ff0000",
       website: "#",
